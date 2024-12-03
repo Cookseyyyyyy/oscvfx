@@ -1,38 +1,98 @@
+body, html, #root {
+  margin: 0;
+  padding: 0;
+  height: 100%;
+}
+
 .App {
-  text-align: center;
+  height: 100%;
 }
 
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
-}
-
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
-  }
-}
-
-.App-header {
-  background-color: #282c34;
-  min-height: 100vh;
+.modules-container {
   display: flex;
-  flex-direction: column;
+  flex-wrap: wrap;
+  align-items: flex-start;
+  padding: 0.5em;
+}
+
+.module-card {
+  position: relative;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  padding: 0.3em;
+  margin: 0.3em;
+  width: 140px;
+  background-color: #282c34;
+  color: white;
+  font-size: 0.8em;
+}
+
+.module-card h3 {
+  margin: 0 0 0.3em 0;
+  font-size: 1em;
+}
+
+.module-card label {
+  display: block;
+  margin-bottom: 0.2em;
+}
+
+.module-card input {
+  width: 100%;
+  padding: 0.2em;
+  margin-top: 0.1em;
+  background-color: #3b3f45;
+  color: white;
+  border: none;
+  border-radius: 2px;
+  font-size: 0.8em;
+}
+
+.filtered-messages {
+  text-align: left;
+}
+
+.filtered-messages h4 {
+  margin: 0.4em 0 0.2em;
+  font-size: 0.9em;
+}
+
+.remove-button {
+  position: absolute;
+  top: 3px;
+  right: 3px;
+  background: transparent;
+  color: white;
+  border: none;
+  font-size: 0.9em;
+  cursor: pointer;
+}
+
+.remove-button:hover {
+  color: red;
+}
+
+/* Style the "+" button to match the module cards */
+.add-button {
+  width: 140px;
+  height: 100px;
+  margin: 0.3em;
+  border: 1px dashed #ccc;
+  background-color: transparent;
+  color: #ccc;
+  font-size: 2em;
+  cursor: pointer;
+  display: flex;
   align-items: center;
   justify-content: center;
-  font-size: calc(10px + 2vmin);
-  color: white;
 }
 
-.App-link {
+.add-button:hover {
+  border-color: #61dafb;
   color: #61dafb;
 }
 
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
+/* Optional: Set the background color */
+body {
+  background-color: #282c34;
 }
