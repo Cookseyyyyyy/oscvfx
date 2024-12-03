@@ -2,17 +2,24 @@ body, html, #root {
   margin: 0;
   padding: 0;
   height: 100%;
+  overflow: hidden;
 }
 
 .App {
+  position: relative;
+  width: 100%;
   height: 100%;
 }
 
 .modules-container {
+  position: absolute;
+  top: 0;
+  left: 0;
   display: flex;
   flex-wrap: wrap;
   align-items: flex-start;
   padding: 0.5em;
+  z-index: 1;
 }
 
 .module-card {
@@ -95,4 +102,9 @@ body, html, #root {
 /* Optional: Set the background color */
 body {
   background-color: #282c34;
+}
+
+.ParticleSwarm {
+  width: 100%;
+  height: 100%;
 }

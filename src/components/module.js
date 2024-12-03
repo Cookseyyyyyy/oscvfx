@@ -1,8 +1,9 @@
 import React, { useState, useEffect } from 'react';
 
-function Module({ id, oscMessages, removeModule }) {
+function Module({ id, oscMessages, removeModule, onEffectTrigger }) {
   const [reference, setReference] = useState('');
   const [notes, setNotes] = useState('');
+  const [selectedEffect, setSelectedEffect] = useState('Burst');
   const [lastFilteredMessage, setLastFilteredMessage] = useState(null);
 
   useEffect(() => {
@@ -50,12 +51,23 @@ function Module({ id, oscMessages, removeModule }) {
       return matchesReference && matchesNote;
     });
 
-    setLastFilteredMessage(filtered || null);
-  }, [oscMessages, reference, notes]);
+    if (filtered) {
+      // Only trigger the effect if it's a new message
+      if (
+        !lastFilteredMessage ||
+        lastFilteredMessage.address !== filtered.address
+      ) {
+        setLastFilteredMessage(filtered);
+        onEffectTrigger(selectedEffect);
+      }
+    }
+  }, [oscMessages, reference, notes, selectedEffect]);
 
   return (
     <div className="module-card">
-      <button className="remove-button" onClick={() => removeModule(id)}>x</button>
+      <button className="remove-button" onClick={() => removeModule(id)}>
+        x
+      </button>
       <h3>Module</h3>
       <label>
         Reference:
@@ -63,25 +75,34 @@ function Module({ id, oscMessages, removeModule }) {
           type="text"
           value={reference}
           onChange={(e) => setReference(e.target.value)}
-          placeholder="Enter reference"
+          placeholder="Reference"
         />
       </label>
-      <br />
       <label>
-        MIDI Notes (comma-separated):
+        MIDI Notes:
         <input
           type="text"
           value={notes}
           onChange={(e) => setNotes(e.target.value)}
-          placeholder="e.g., 36,38,40"
+          placeholder="e.g., 36,38"
         />
       </label>
+      <label>
+        Effect:
+        <select
+          value={selectedEffect}
+          onChange={(e) => setSelectedEffect(e.target.value)}
+        >
+          <option value="Burst">Burst</option>
+          <option value="Light Up">Light Up</option>
+        </select>
+      </label>
       <div className="filtered-messages">
-        <h4>Last Filtered Message:</h4>
+        <h4>Last Message:</h4>
         {lastFilteredMessage ? (
           <div>{lastFilteredMessage.address}</div>
         ) : (
-          <p>No messages match the criteria.</p>
+          <p>No messages match.</p>
         )}
       </div>
     </div>
